@@ -28,19 +28,33 @@
 
 from __future__ import print_function
 import twitter
+import time
 
-CONSUMER_KEY = 'WWWWWWWW'
-CONSUMER_SECRET = 'XXXXXXXX'
-ACCESS_TOKEN = 'YYYYYYYY'
-ACCESS_TOKEN_SECRET = 'ZZZZZZZZ'
+
+CONSUMER_KEY = 'ISQPrRJ3UvtNl17hdURE95XYd'
+CONSUMER_SECRET = 'C1BUGhoi00iZkW0WlGZyzloIFtuHvvd60Rp6Ysq1QQhgTk2dYv'
+ACCESS_TOKEN = '910266067213180928-LIRuvdeYl2X1XRXCRA12Gk3cUSLyoXd'
+ACCESS_TOKEN_SECRET = 'WwQ2xo67CnEJGeTVbcmLwyaY5Dx3f2SMnhHY40mc8dKVy'
 
 
 # Create an Api instance.
 api = twitter.Api(consumer_key=CONSUMER_KEY,
                   consumer_secret=CONSUMER_SECRET,
                   access_token_key=ACCESS_TOKEN,
-                  access_token_secret=ACCESS_TOKEN_SECRET)
+                  access_token_secret=ACCESS_TOKEN_SECRET,
+                  sleep_on_rate_limit=True)
 
-users = api.GetFriends()
 
-print([u.screen_name for u in users])
+targets = ['PortlandHR','TBoPortland','ProvvistaNW','zupans','newseasons']
+users = []
+for target in targets:
+	users = users + api.GetFriends(target)
+
+print('Number of found users: ', len(targets))
+
+for user in users:
+	print("Befriended: %s" % user.screen_name)
+	api.CreateFriendship(user.id)
+
+
+print("Followed %s: ", len(users) % target)

@@ -1,0 +1,4 @@
+# Print to the log every minute
+* * * * * date >> /Users/edankrolewicz/Projects/twitter-bot/python-twitter/examples/cron.log
+* * * * 2 /Users/edankrolewicz/Projects/twitter-bot/python-twitter/examples/engage.py >> /Users/edankrolewicz/Projects/twitter-bot/python-twitter/examples/cron.log
+
