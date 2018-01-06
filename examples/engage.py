@@ -8,7 +8,7 @@ import random
 import time
 import datetime
 from datetime import timedelta
-from engage_settings import *
+from engage_settings_chakra import *
 
 def check_description_and_follow(api, user, bio_kws, city):
 	# Check if user description (bio/title) contains keywords in bio_kws list, 
@@ -70,21 +70,22 @@ if __name__ == '__main__':
 	print(strftime("Gathering Users: %a, %d %b %Y %H:%M:%S", localtime()))
 
 	# Get a ton of queries based on keywords, find matching tweets, like tweets.
-	terms = create_query_words(post_kws)
-	random.shuffle(terms) #Randomize this for every time through.
+	# terms = create_query_words(post_kws)
+	terms = post_kws + bio_kws
+        random.shuffle(terms) #Randomize this for every time through.
 	geo_code = '45.52307063819725,-122.67630636692047,100mi'
 	today = datetime.date.today()
 	month_ago = (today-timedelta(days=30)).strftime('%Y-%m-%d')
 	for term in terms:
 		print("Searching for tweets of term: %s" % term)
-		tweets = api.GetSearch(term=term, geocode=geo_code, since=month_ago)
+		tweets = api.GetSearch(term=term, since=month_ago)
 		print("tweets", tweets)
 		print("%d tweets found for term: %s" % (len(tweets), term))	
 		for tweet in tweets:
 			try:
 				api.CreateFavorite(tweet)
 				print("liked tweet from %s" % tweet.user.screen_name)
-				delay = random.randint(1,10)
+				delay = random.randint(1,60)
 				print("Post Favorite Sleep for %d seconds." % delay)
 				time.sleep(delay)
 			except:

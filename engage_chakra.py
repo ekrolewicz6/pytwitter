@@ -8,7 +8,7 @@ import random
 import time
 import datetime
 from datetime import timedelta
-from engage_settings import *
+from engage_settings_chakra import *
 
 def check_description_and_follow(api, user, bio_kws, city):
 	# Check if user description (bio/title) contains keywords in bio_kws list, 
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 
 	# Get a ton of queries based on keywords, find matching tweets, like tweets.
 	# terms = create_query_words(post_kws)
-	terms = post_kws
+	terms = post_kws + bio_kws
 	random.shuffle(terms) #Randomize this for every time through.
 	geo_code = '45.52307063819725,-122.67630636692047,100mi'
 	today = datetime.date.today()
@@ -81,30 +81,25 @@ if __name__ == '__main__':
 		delay = random.randint(1,10)
 		print("Before Search Sleep for %d seconds." % delay)
 		time.sleep(delay)
-		tweets = api.GetSearch(term=term, geocode=geo_code, since=month_ago)
+		# tweets = api.GetSearch(term=term, geocode=geo_code, since=month_ago)
 		# Get Tweets Anywhere.
-		# tweets = api.GetSearch(term=term, since=month_ago)
+		tweets = api.GetSearch(term=term, since=month_ago)
 		print("tweets", tweets)
 		print("%d tweets found for term: %s" % (len(tweets), term))	
 		for tweet in tweets:
 			try:
-				valid = True
-                                for word in exception_kws:
-                                    if word in tweet.text:
-                                        valid = False
-                                if valid:
-                                    api.CreateFavorite(tweet)
-				    print("liked tweet from %s" % tweet.user.screen_name)
-				    delay = 60
-				    print("Post Favorite Sleep for %d seconds." % delay)
-				    time.sleep(delay)
+				api.CreateFavorite(tweet)
+				print("liked tweet from %s" % tweet.user.screen_name)
+				delay = 60
+				print("Post Favorite Sleep for %d seconds." % delay)
+				time.sleep(delay)
 			except:
-				print(strftime("Reached Rate Limit. Waiting 1 minutes: %a, %d %b %Y %H:%M:%S", localtime()))
-				time.sleep(60)
+				print(strftime("Reached Rate Limit. Waiting 15 minutes: %a, %d %b %Y %H:%M:%S", localtime()))
+				time.sleep(900)
 
 
 	# # TODO Save the user objects in a local cache/file (include at least user id and screen_name)
-            	# my_friends = api.GetFriends() # Get a list of users I follow.
+	# my_friends = api.GetFriends() # Get a list of users I follow.
 	# print('Number of users found: ', len(my_friends))
 	# for user in my_friends:
 	# 	try:

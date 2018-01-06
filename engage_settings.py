@@ -48,6 +48,8 @@ post_kws = ['food','eatpdx','pdxeats','portland food', 'eat portland','delicious
 			'employeeengagement','workexperience','foodtech','Fair Trade', 'Non-GMO', 'Gluten-Free', 'glutenfree','lactosefree','Lactose-Free','gluten', 'lactose','water', 'coffee', 'tea',
 			'organic','PortlandBeer','Keg','Growler','cider','mead','brews','wine','chef','ingredients', 'chocolate', 'paleo']
 
+exception_kws = ['police','pdx911']
+
 # Set Location
 city = 'Portland, OR'
 
