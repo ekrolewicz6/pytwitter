@@ -5,10 +5,10 @@ from time import localtime, strftime
 import twitter
 import random
 
-CONSUMER_KEY = 'fP7SRcKlEsYYsQosCtkJB7Ktg'
-CONSUMER_SECRET = '8mMrZ2AHzP6LUxVPBEaoWknJFdoGkPWDvcd6ge74KGoqD15mnq'
-ACCESS_TOKEN = '821692353131839488-3Y4PFI2WjOa5jirQNaz1sVJU6LZQ0KR'
-ACCESS_TOKEN_SECRET = '80os3qt0jCzmPM96X0SgLNbtFwyUcfvDzCse1A57mGskY'
+CONSUMER_KEY = '$CONSUMER_KEY'
+CONSUMER_SECRET = '$CONSUMER_SCERET'
+ACCESS_TOKEN = '$ACCESS_TOKEN'
+ACCESS_TOKEN_SECRET = 'ACCESS_TOKEN_SECRET'
 
 
 # Create an Api instance.
@@ -47,9 +47,3 @@ post_kws = ['Aesthetic Candles','Earth','healing',	'Oracle cards',	'Spiritual','
 'Crystal Singing Bowls',	'Feng shui',	'metaphysical',	'soul',	'Natural healing'
 'Earth',	'Granola',	'Mindfulness',	'Soy candles',	
 			'Spirit',]
-
-# Set Location
-city = 'Portland, OR'
-
-# Get a list of targets
-targets = ['PortlandHR','TBoPortland','ProvvistaNW','zupans','newseasons']
